@@ -116,7 +116,7 @@ public class Border : MonoBehaviour {
         allDots = new_allDots;
     }
 
- void print_dot()
+    void print_dot()
     {
         Debug.Log("this is the dot list");
         for (int i1 = 0; i1 < 5; i1++)
@@ -212,11 +212,15 @@ public class Border : MonoBehaviour {
             {
                 //create new vector
                 Vector3 new_location = new Vector3(col_location, j - total_null, dotz);
+                Dot same_dot = allDots[col_location, j].GetComponent<Dot>();
                 //get the previous location for lerp movement
-                Vector3 prev_location = allDots[col_location, j].transform.position;
-                allDots[col_location, j].transform.position = Vector3.Lerp(prev_location, new_location, .00001f);
+                Vector3 prev_location = same_dot.transform.position;
+                same_dot.newx = new_location.x;
+                same_dot.newy = new_location.y;
+                same_dot.should_move = 1;
+                //allDots[col_location, j].transform.position = Vector3.Lerp(prev_location, new_location, .4f);
                 //move the dot to the updated position
-                allDots[col_location, j].transform.position = new_location;
+                //allDots[col_location, j].transform.position = new_location;
                 //set the object into the new location of allDot
                 allDots[col_location, j - total_null] = allDots[col_location, j];
                 allDots[col_location, j] = null;
