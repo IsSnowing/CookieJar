@@ -8,13 +8,14 @@ using UnityEngine.UI;
 public class Border : MonoBehaviour {
     private Vector3 screenPoint;
     private Vector3 offset;
-
+    public static int pause = 0;
     public int width;
     public int height;
     //public GameObject tilePrefab;
     private GameObject[,] allTiles;
     public GameObject[] dots;
     public GameObject[,] allDots = new GameObject[5, 5];
+    public static int[,] can_move = new int[5, 5];
     public int dotz;
     public int boardz;
     public Text scoreDisplay;
@@ -23,6 +24,7 @@ public class Border : MonoBehaviour {
     private int start_x = -2;
     private int start_y = -2;
     private int score = 0;
+    private int combine = 0;
     private string score_str = "Score:  ";
 
     // Use this for initialization
@@ -30,21 +32,37 @@ public class Border : MonoBehaviour {
         
         //this.transform.Rotate(0, 0, 90, Space.World);
         Setup();
+        init_has_move();
         //this.transform.Rotate(0, 0, 180, Space.World);
         // dataRotate_n90();
-        
+
     }
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(pause);
 
         //this.transform.Rotate(Vector3.right * Time.deltaTime);
-        StartCoroutine(combine_dots());
-        rotate();
-        combine_dots();
-        //test();
-        //chosse_combine_dot();
-        drop();
-        ScoreUpdate();
+        //StartCoroutine(combine_dots());
+
+        //if (pause == 0)
+        //{
+        //if (combine == 1)
+        //{
+
+       wait();
+        //}
+    }
+
+    public void init_has_move()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+                can_move[i, j] = 0;
+                Debug.Log(can_move[i, j]);
+            }
+        }
     }
 
     //update the score
@@ -217,13 +235,21 @@ public class Border : MonoBehaviour {
                 Vector3 prev_location = same_dot.transform.position;
                 same_dot.newx = new_location.x;
                 same_dot.newy = new_location.y;
-                same_dot.should_move = 1;
+                same_dot.pause_game = 1;
+                same_dot.set_space(10);
+                StartCoroutine(same_dot.activate_moveDot());
                 //allDots[col_location, j].transform.position = Vector3.Lerp(prev_location, new_location, .4f);
                 //move the dot to the updated position
                 //allDots[col_location, j].transform.position = new_location;
                 //set the object into the new location of allDot
+                same_dot.dataIndexX = col_location;
+                same_dot.dataIndexY = j - total_null;
+                //while(hasPauseGame() == 1)
+                //{
+                //}
                 allDots[col_location, j - total_null] = allDots[col_location, j];
                 allDots[col_location, j] = null;
+                
             }
             j++;
         }
@@ -249,7 +275,7 @@ public class Border : MonoBehaviour {
 
     }
     //combie the dot with the same color
-    private IEnumerator combine_dots()
+    private void combine_dots()
     {
 
 
@@ -274,12 +300,14 @@ public class Border : MonoBehaviour {
                             dot.size += same_dot.size;
                             //destory the dot that has been combine
                             Destroy(allDots[i, next_index]);
+                            same_dot.distroy = 1;
                             allDots[i, next_index] = null;
                             next_index++;
                         }
                         //do one match at a time
+                        //StartCoroutine(moveDown(i));
                         moveDown(i);
-                        yield return new WaitForSeconds(2);
+                        //yield return new WaitForSeconds(2);
                         break;
                     }
                 }
@@ -359,5 +387,49 @@ public class Border : MonoBehaviour {
     }
 
 
+    private int hasPauseGame()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                Debug.Log(can_move.Length);
+                if (allDots[i, j] != null)
+                {
+                    Dot dot = allDots[i, j].GetComponent<Dot>();
+
+                    if (dot.pause_game == 1)
+                    {
+                        return 1;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+
+
+    void wait()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+                if(allDots[i,j].GetComponent<Dot>().pause_game == 1)
+                {
+                    return;
+                }
+            }
+        }
+        combine_dots();
+        //}
+        rotate();
+
+        //test();
+        //chosse_combine_dot();
+        drop();
+        ScoreUpdate();
+    }
 
 }
