@@ -47,9 +47,10 @@ public class Border : MonoBehaviour {
         //if (pause == 0)
         //{
         //if (combine == 1)
+        
         //{
 
-       wait();
+        wait();
         //}
     }
 
@@ -254,6 +255,8 @@ public class Border : MonoBehaviour {
             j++;
         }
         j = 4;
+
+        /*
         //fill in the null with new dot
         //result:
         //[1, 2, 3, 4, 6, 7, newdot, newdot, newdot]
@@ -271,9 +274,35 @@ public class Border : MonoBehaviour {
 
             j--;
         }
+        */
 
 
     }
+
+    //add new dot within the empty space
+    void addDots()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                if (allDots[i, j] == null)
+                {
+                    int dotToUse = UnityEngine.Random.Range(0, dots.Length);
+                    //get the gameobject location from the allDot location
+                    //int[] curr_location = getLocation(col_location, j);
+                    Vector3 tempPosition = new Vector3(i, j, dotz);
+                    GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
+                    dot.transform.parent = this.transform;
+                    dot.name = "(" + i + "," + j + "," + dotz + ")";
+                    allDots[i, j] = dot;
+
+                    j--;
+                }
+             }
+         }
+     }
+   
     //combie the dot with the same color
     private void combine_dots()
     {
@@ -416,12 +445,13 @@ public class Border : MonoBehaviour {
         {
             for(int j = 0; j < 5; j++)
             {
-                if(allDots[i,j].GetComponent<Dot>().pause_game == 1)
+                if (allDots[i, j] != null && allDots[i,j].GetComponent<Dot>().pause_game == 1)
                 {
                     return;
                 }
             }
         }
+        addDots();
         combine_dots();
         //}
         rotate();

@@ -22,7 +22,7 @@ public class Dot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         newx = this.transform.position.x;
-        newy = this.transform.position.y;
+       // newy = this.transform.position.y;
         size = 1;
 	}
 	
