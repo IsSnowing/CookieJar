@@ -21,7 +21,7 @@ public class Dot : MonoBehaviour {
     public Sprite[] sprites;
 	// Use this for initialization
 	void Start () {
-        newx = this.transform.position.x;
+       // newx = this.transform.position.x;
        // newy = this.transform.position.y;
         size = 1;
 	}
@@ -52,7 +52,7 @@ public class Dot : MonoBehaviour {
         //[] + [--] ... [--] + [--] ... [----] + [--] until [----------]
         //float subx = this.transform.position.x + space_x;
         float suby = this.transform.position.y + space_y;
-        if (suby > newy)
+        if (suby > newy && Border.rotating == 0)
         {
             pause_game = 1;
             pre_pos = this.transform.position;

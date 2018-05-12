@@ -26,6 +26,7 @@ public class Border : MonoBehaviour {
     private int score = 0;
     private int combine = 0;
     private string score_str = "Score:  ";
+    public static int rotating = 0;
 
     // Use this for initialization
     void Start () {
@@ -148,8 +149,24 @@ public class Border : MonoBehaviour {
             }
         }
     }
+
+
+    IEnumerator slowDownRotation(int degree)
+    {
+        int angle = degree / 5;
+        int a = 0;
+        rotating = 1;
+        while (a < 5)
+        {
+            this.transform.Rotate(0, 0, angle, Space.World);
+            a++;
+            yield return new WaitForSeconds(.01f);
+        }
+        
+    }
+
     //rotate the whole box
-    void rotate()
+    IEnumerator rotate()
     {
         if(Input.GetMouseButtonUp(0)){
            
@@ -159,26 +176,31 @@ public class Border : MonoBehaviour {
             // Vector3 cursorPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z - 1);
             Debug.Log(Input.mousePosition.x);
             
-            if (Input.mousePosition.x > 130)
+            if (Input.mousePosition.x >= 105)
             {
                 //  while (this.gameObject.transform.rotation.z != this.gameObject.transform.rotation.z + 90)
                 Debug.Log("greather than 130");
-                this.transform.Rotate(0, 0, -90, Space.World);
+                //this.transform.Rotate(0, 0, -90, Space.World);
+                StartCoroutine(slowDownRotation(-90));
+                yield return new WaitForSeconds(.5f);
                 dataRotate_n90();
                 
 
             }
-            else if (Input.mousePosition.x < 130)
+            else if (Input.mousePosition.x < 105)
             {
                 // while (this.gameObject.transform.rotation.z != this.gameObject.transform.rotation.z - 90)
                 Debug.Log("less than 130");
-                this.transform.Rotate(0, 0, 90, Space.World);
+                //this.transform.Rotate(0, 0, 90, Space.World);
+                StartCoroutine(slowDownRotation(90));
+                yield return new WaitForSeconds(.5f);
                 dataRotate_90();
                 
             }
             // Debug.Log("this is rotation" + (int)this.transform.rotation.eulerAngles.z);
             Debug.Log(allDots[0, 0].tag);
         }
+        rotating = 0;
     }
     //testing code, happen on click
     void test()
@@ -445,21 +467,34 @@ public class Border : MonoBehaviour {
         {
             for(int j = 0; j < 5; j++)
             {
-                if (allDots[i, j] != null && allDots[i,j].GetComponent<Dot>().pause_game == 1)
+                if (rotating == 1 || (allDots[i, j] != null &&
+                    allDots[i,j].GetComponent<Dot>().pause_game == 1)
+                    )
                 {
                     return;
                 }
             }
         }
-        addDots();
-        combine_dots();
+        if (rotating == 0)
+        {
+            StartCoroutine(rotate());
+        }
+        //rotate();
+        //if(rotating == 1)
+        //{
+        //    return;
         //}
-        rotate();
 
+        
+        combine_dots();
+
+
+        //}
         //test();
         //chosse_combine_dot();
         drop();
         ScoreUpdate();
+        addDots();
     }
 
 }
