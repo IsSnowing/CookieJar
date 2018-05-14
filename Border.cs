@@ -27,6 +27,7 @@ public class Border : MonoBehaviour {
     private int combine = 0;
     private string score_str = "Score:  ";
     public static int rotating = 0;
+    private int afterInit = 0;
 
     // Use this for initialization
     void Start () {
@@ -48,10 +49,11 @@ public class Border : MonoBehaviour {
         //if (pause == 0)
         //{
         //if (combine == 1)
-        
-        //{
 
+        //{
+        
         wait();
+    
         //}
     }
 
@@ -176,7 +178,7 @@ public class Border : MonoBehaviour {
             // Vector3 cursorPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z - 1);
             Debug.Log(Input.mousePosition.x);
             
-            if (Input.mousePosition.x >= 105)
+            if (Input.mousePosition.x >= 130)
             {
                 //  while (this.gameObject.transform.rotation.z != this.gameObject.transform.rotation.z + 90)
                 Debug.Log("greather than 130");
@@ -184,10 +186,9 @@ public class Border : MonoBehaviour {
                 StartCoroutine(slowDownRotation(-90));
                 yield return new WaitForSeconds(.5f);
                 dataRotate_n90();
-                
-
+                afterInit = 1;
             }
-            else if (Input.mousePosition.x < 105)
+            else if (Input.mousePosition.x < 130)
             {
                 // while (this.gameObject.transform.rotation.z != this.gameObject.transform.rotation.z - 90)
                 Debug.Log("less than 130");
@@ -195,7 +196,7 @@ public class Border : MonoBehaviour {
                 StartCoroutine(slowDownRotation(90));
                 yield return new WaitForSeconds(.5f);
                 dataRotate_90();
-                
+                afterInit = 1;
             }
             // Debug.Log("this is rotation" + (int)this.transform.rotation.eulerAngles.z);
             Debug.Log(allDots[0, 0].tag);
@@ -310,7 +311,12 @@ public class Border : MonoBehaviour {
             {
                 if (allDots[i, j] == null)
                 {
-                    int dotToUse = UnityEngine.Random.Range(0, dots.Length);
+                    int fifity = UnityEngine.Random.Range(0, 4);
+                    int dotToUse = 4;
+                    if (fifity == 1)
+                    {
+                        dotToUse = UnityEngine.Random.Range(0, dots.Length - 1);
+                    }
                     //get the gameobject location from the allDot location
                     //int[] curr_location = getLocation(col_location, j);
                     Vector3 tempPosition = new Vector3(i, j, dotz);
@@ -380,28 +386,8 @@ public class Border : MonoBehaviour {
     private void Setup()
     {
         allDots = new GameObject[width, height];
-        
-        //width = width + start_x;
-        //height = height + start_y;
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                //creating the backgroundtile
-                //Vector3 tempPosition = new Vector3(i, j, boardz);
-             //   GameObject backgroundTile = Instantiate(tilePrefab, tempPosition, Quaternion.identity) as GameObject;
-               // backgroundTile.transform.parent = this.transform;
-               // backgroundTile.name = "(" + i + "," + j + "," + boardz + ")";
 
-                //createing dots on the backgroundtile
-                int dotToUse = UnityEngine.Random.Range(0, dots.Length);
-                Vector3 tempPosition = new Vector3(i, j, dotz);
-                GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
-                dot.transform.parent = this.transform;
-                dot.name = "(" + i + "," + j + "," + dotz + ")";
-                allDots[i, j] = dot;
-            }
-        }
+        addDots();
     }
    
 
@@ -418,22 +404,29 @@ public class Border : MonoBehaviour {
     //drop the dots if it is in the correct opening
     private void drop()
     {
-        //if it is green and it the correct location
-        if(allDots[2,0].tag == "Green" && (int)this.transform.rotation.eulerAngles.z == 0)
+        if (allDots[2, 0].tag == "Grey")
         {
             drop_helper();
         }
-        else if(allDots[2, 0].tag == "Yellow" && (int)this.transform.rotation.eulerAngles.z == 270)
+        else
         {
-            drop_helper();
-        }
-        else if(allDots[2, 0].tag == "Red" && (int)this.transform.rotation.eulerAngles.z == 90)
-        {
-            drop_helper();
-        }
-        else if(allDots[2, 0].tag == "Blue" && (int)this.transform.rotation.eulerAngles.z == 180)
-        {
-            drop_helper();
+            //if it is green and it the correct location
+            if (allDots[2, 0].tag == "Green" && (int)this.transform.rotation.eulerAngles.z == 0)
+            {
+                drop_helper();
+            }
+            else if (allDots[2, 0].tag == "Yellow" && (int)this.transform.rotation.eulerAngles.z == 270)
+            {
+                drop_helper();
+            }
+            else if (allDots[2, 0].tag == "Red" && (int)this.transform.rotation.eulerAngles.z == 90)
+            {
+                drop_helper();
+            }
+            else if (allDots[2, 0].tag == "Blue" && (int)this.transform.rotation.eulerAngles.z == 180)
+            {
+                drop_helper();
+            }
         }
     }
 
@@ -485,16 +478,18 @@ public class Border : MonoBehaviour {
         //    return;
         //}
 
-        
-        combine_dots();
+        if (afterInit == 1)
+        {
+            combine_dots();
 
 
-        //}
-        //test();
-        //chosse_combine_dot();
-        drop();
-        ScoreUpdate();
-        addDots();
+            //}
+            //test();
+            //chosse_combine_dot();
+            drop();
+            ScoreUpdate();
+            addDots();
+        }
     }
 
 }
