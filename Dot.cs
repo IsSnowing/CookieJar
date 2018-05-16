@@ -14,7 +14,7 @@ public class Dot : MonoBehaviour {
     private Vector3 pre_pos;
     private float space_x = 0;
     private float space_y = 0;
-    public int distroy = 0;
+    public int distroy;
     
 
 
@@ -24,7 +24,9 @@ public class Dot : MonoBehaviour {
        // newx = this.transform.position.x;
        // newy = this.transform.position.y;
         size = 1;
-	}
+        distroy = 0;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,6 +48,7 @@ public class Dot : MonoBehaviour {
     //move the dot to the new position smoothly
     public int moveDot()
     {
+        Debug.Log(this.distroy);
         //board.pause = 1;
 
         //total distance [----------]
@@ -72,9 +75,10 @@ public class Dot : MonoBehaviour {
             //Debug.Log((int)newx);
             //Debug.Log((int)newy);
             Border.can_move[dataIndexX, dataIndexY] = 0;
-            if (distroy == 1)
+            if (this.distroy == 1)
             {
-                //Destroy(this);
+                Debug.Log("it is destroy");
+                Destroy(this);
             }
             return 0;
         }

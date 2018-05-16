@@ -21,8 +21,8 @@ public class DotAnimation : MonoBehaviour {
     void changeState()
     {
         int s = dot.size;
-        Debug.Log("this is the dot size");
-        Debug.Log(s);
+        //Debug.Log("this is the dot size");
+        //Debug.Log(s);
         anim.SetInteger("Dot1", dot.size);
     }
 }
