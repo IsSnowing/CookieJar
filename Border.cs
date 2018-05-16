@@ -41,7 +41,7 @@ public class Border : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(pause);
+        //Debug.Log(pause);
 
         //this.transform.Rotate(Vector3.right * Time.deltaTime);
         //StartCoroutine(combine_dots());
@@ -176,12 +176,12 @@ public class Border : MonoBehaviour {
             // screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
             //offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
             // Vector3 cursorPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z - 1);
-            Debug.Log(Input.mousePosition.x);
+            //Debug.Log(Input.mousePosition.x);
             
             if (Input.mousePosition.x >= 130)
             {
                 //  while (this.gameObject.transform.rotation.z != this.gameObject.transform.rotation.z + 90)
-                Debug.Log("greather than 130");
+                //Debug.Log("greather than 130");
                 //this.transform.Rotate(0, 0, -90, Space.World);
                 StartCoroutine(slowDownRotation(-90));
                 yield return new WaitForSeconds(.5f);
@@ -199,7 +199,7 @@ public class Border : MonoBehaviour {
                 afterInit = 1;
             }
             // Debug.Log("this is rotation" + (int)this.transform.rotation.eulerAngles.z);
-            Debug.Log(allDots[0, 0].tag);
+            //Debug.Log(allDots[0, 0].tag);
         }
         rotating = 0;
     }

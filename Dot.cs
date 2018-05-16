@@ -69,8 +69,8 @@ public class Dot : MonoBehaviour {
             space_x = 0;
             space_y = 0;
             //Border.pause = 0;
-            Debug.Log((int)newx);
-            Debug.Log((int)newy);
+            //Debug.Log((int)newx);
+            //Debug.Log((int)newy);
             Border.can_move[dataIndexX, dataIndexY] = 0;
             if (distroy == 1)
             {
