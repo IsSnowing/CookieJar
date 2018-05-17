@@ -77,8 +77,8 @@ public class Dot : MonoBehaviour {
             Border.can_move[dataIndexX, dataIndexY] = 0;
             if (this.distroy == 1)
             {
-                Debug.Log("it is destroy");
-                Destroy(this);
+                //Debug.Log("it is destroy");
+                //Destroy(this);
             }
             return 0;
         }
