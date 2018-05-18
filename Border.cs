@@ -54,8 +54,8 @@ public class Border : MonoBehaviour {
         //if (combine == 1)
 
         //{
-        
-        wait();
+        test();
+        //wait();
     
         //}
     }
@@ -486,15 +486,16 @@ public class Border : MonoBehaviour {
     {
         for (int i = 0; i < 5; i++)
         {
+            int nullcount = 0;
             for (int j = 0; j < 5; j++)
             {
-                int nullcount = 0;
+                
                 if(allDots[i, j] == null)
                 {
                     nullcount++;
                 }else if(nullcount > 0)
                 {
-                    
+
                     Dot dot = allDots[i, j].GetComponent<Dot>();
                     dot.newx = i;
                     dot.newy = j - nullcount;
@@ -503,6 +504,7 @@ public class Border : MonoBehaviour {
                     StartCoroutine(dot.activate_moveDot());
                     allDots[i, j - nullcount] = allDots[i, j];
                     allDots[i, j] = null;
+                    
                 }
             }
         }
@@ -596,8 +598,9 @@ public class Border : MonoBehaviour {
         {
             //Debug.Log("press");
             combine_dotsHelper();
-
+            destroyDot();
             moveDown2();
+            addDots();
         }
     }
     
@@ -629,9 +632,7 @@ public class Border : MonoBehaviour {
         if (afterInit == 1)
         {
             //combine_dots();
-            combine_dotsHelper();
-            destroyDot();
-            moveDown2();
+            
             //
             //}
             //test();
