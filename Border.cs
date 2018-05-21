@@ -15,6 +15,7 @@ public class Border : MonoBehaviour {
     //public GameObject tilePrefab;
     private GameObject[,] allTiles;
     public GameObject[] dots;
+    public Color[] cl;
     public GameObject[,] allDots = new GameObject[5, 5];
     public static int[,] can_move = new int[5, 5];
     public int dotz;
@@ -31,6 +32,7 @@ public class Border : MonoBehaviour {
     private string score_str = "Score:  ";
     public static int rotating = 0;
     private int afterInit = 0;
+    private int changecolor = 0;
 
     // Use this for initialization
     void Start () {
@@ -54,8 +56,9 @@ public class Border : MonoBehaviour {
         //if (combine == 1)
 
         //{
-        test();
-        //wait();
+        //test();
+        wait();
+        
     
         //}
     }
@@ -64,6 +67,7 @@ public class Border : MonoBehaviour {
     //add new dot within the empty space
     void addDots()
     {
+        //yield return new WaitForSeconds(.1f);
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 5; j++)
@@ -71,12 +75,12 @@ public class Border : MonoBehaviour {
                 if (allDots[i, j] == null)
                 {
                     int fifity = UnityEngine.Random.Range(0, 2);
-                    int dotToUse = 4;
+                    //int dotToUse = 4;
                     if (fifity == 1)
                     {
-                        dotToUse = UnityEngine.Random.Range(0, dots.Length - 1);
+                        //dotToUse = UnityEngine.Random.Range(0, dots.Length - 1);
                     }
-                    //int dotToUse = 4;
+                    int dotToUse = 4;
                     //get the gameobject location from the allDot location
                     //int[] curr_location = getLocation(col_location, j);
                     Vector3 tempPosition = new Vector3(i, j, dotz);
@@ -124,21 +128,31 @@ public class Border : MonoBehaviour {
             int color = UnityEngine.Random.Range(0, 4);
 
 
+           
+            Color c = dots[color].GetComponent<SpriteRenderer>().color;
+            Debug.Log(c);
+            String t = dots[color].tag;
+            Debug.Log(t);
+
             //change the first dot
-            Destroy(allDots[rowLst[firstDotIndex], colLst[firstDotIndex]]);
-            Vector3 tempPosition = new Vector3(rowLst[firstDotIndex], colLst[firstDotIndex], dotz);
-            GameObject dot = Instantiate(dots[color], tempPosition, Quaternion.identity);
-            dot.transform.parent = this.transform;
-            dot.name = "(" + rowLst[firstDotIndex] + "," + colLst[firstDotIndex] + "," + dotz + ")";
-            allDots[rowLst[firstDotIndex], colLst[firstDotIndex]] = dot;
+            allDots[rowLst[firstDotIndex], colLst[firstDotIndex]].GetComponent<SpriteRenderer>().color = c;
+            allDots[rowLst[firstDotIndex], colLst[firstDotIndex]].tag = t;
+            //Destroy(allDots[rowLst[firstDotIndex], colLst[firstDotIndex]]);
+            //Vector3 tempPosition = new Vector3(rowLst[firstDotIndex], colLst[firstDotIndex], dotz);
+            // GameObject dot = Instantiate(dots[color], tempPosition, Quaternion.identity);
+            //dot.transform.parent = this.transform;
+            //dot.name = "(" + rowLst[firstDotIndex] + "," + colLst[firstDotIndex] + "," + dotz + ")";
+            //allDots[rowLst[firstDotIndex], colLst[firstDotIndex]] = dot;
 
             //change the second dot
-            Destroy(allDots[rowLst[secondDotIndex], colLst[secondDotIndex]]);
-            tempPosition = new Vector3(rowLst[secondDotIndex], colLst[secondDotIndex], dotz);
-            dot = Instantiate(dots[color], tempPosition, Quaternion.identity);
-            dot.transform.parent = this.transform;
-            dot.name = "(" + rowLst[secondDotIndex] + "," + colLst[secondDotIndex] + "," + dotz + ")";
-            allDots[rowLst[secondDotIndex], colLst[secondDotIndex]] = dot;
+            allDots[rowLst[secondDotIndex], colLst[secondDotIndex]].GetComponent<SpriteRenderer>().color = c;
+            allDots[rowLst[secondDotIndex], colLst[secondDotIndex]].tag = t;
+            //Destroy(allDots[rowLst[secondDotIndex], colLst[secondDotIndex]]);
+            //tempPosition = new Vector3(rowLst[secondDotIndex], colLst[secondDotIndex], dotz);
+            //dot = Instantiate(dots[color], tempPosition, Quaternion.identity);
+            //dot.transform.parent = this.transform;
+            //dot.name = "(" + rowLst[secondDotIndex] + "," + colLst[secondDotIndex] + "," + dotz + ")";
+            //allDots[rowLst[secondDotIndex], colLst[secondDotIndex]] = dot;
 
 
         }
@@ -215,26 +229,20 @@ public class Border : MonoBehaviour {
 
                     Dot dot = allDots[i, j].GetComponent<Dot>();
                     int next_index = j + 1;
-                    //while if the color is the same, reomve the one that are the same
-                    //and only keep the first one
-                    //Debug.Log("location" + i + next_index);
-                    //Debug.Log("this is the object" + allDots[i, next_index]);
                     while (next_index < 5 && allDots[i, next_index].tag == dot.tag)
-
                     {
                         Debug.Log("this is next index " + next_index);
                         //combine size add togather
-
                         Dot same_dot = allDots[i, next_index].GetComponent<Dot>();
                         dot.size += same_dot.size;
-                        //destory the dot that has been combine
-                        //Destroy(same_dot);
-                        //Destroy(allDots[i, next_index]);
-                        //same_dot.newx = i;
-                        //same_dot.newy = j;
                         same_dot.distroy = 1;
-                        //allDots[i, next_index] = null;
                         next_index++;
+
+                        //need to change color if one color is combine
+                        if(dot.tag != "Grey")
+                        {
+                            changecolor = 1;
+                        }
                     }
                 }
             }
@@ -459,26 +467,6 @@ public class Border : MonoBehaviour {
         }
         j = 4;
 
-        /*
-        //fill in the null with new dot
-        //result:
-        //[1, 2, 3, 4, 6, 7, newdot, newdot, newdot]
-
-        while (j >= 0 && allDots[col_location, j] == null)
-        {
-            int dotToUse = UnityEngine.Random.Range(0, dots.Length);
-            //get the gameobject location from the allDot location
-            //int[] curr_location = getLocation(col_location, j);
-            Vector3 tempPosition = new Vector3(col_location, j, dotz);
-            GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity);
-            dot.transform.parent = this.transform;
-            dot.name = "(" + col_location + "," + j + "," + dotz + ")";
-            allDots[col_location, j] = dot;
-
-            j--;
-        }
-        */
-
         addDots();
     }
 
@@ -529,17 +517,8 @@ public class Border : MonoBehaviour {
     {
         if(Input.GetMouseButtonUp(0)){
            
-            // this.transform.Rotate(0, 0, -90, Space.World);
-            // screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-            //offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-            // Vector3 cursorPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z - 1);
-            //Debug.Log(Input.mousePosition.x);
-            
             if (Input.mousePosition.x >= 130)
             {
-                //  while (this.gameObject.transform.rotation.z != this.gameObject.transform.rotation.z + 90)
-                //Debug.Log("greather than 130");
-                //this.transform.Rotate(0, 0, -90, Space.World);
                 StartCoroutine(slowDownRotation(-90));
                 yield return new WaitForSeconds(.5f);
                 dataRotate_n90();
@@ -548,9 +527,6 @@ public class Border : MonoBehaviour {
             }
             else if (Input.mousePosition.x < 130)
             {
-                // while (this.gameObject.transform.rotation.z != this.gameObject.transform.rotation.z - 90)
-                //Debug.Log("less than 130");
-                //this.transform.Rotate(0, 0, 90, Space.World);
                 StartCoroutine(slowDownRotation(90));
                 yield return new WaitForSeconds(.5f);
                 dataRotate_90();
@@ -632,14 +608,25 @@ public class Border : MonoBehaviour {
         if (afterInit == 1)
         {
             //combine_dots();
+            combine_dotsHelper();
+            destroyDot();
+            moveDown2();
+            //yield return new WaitForSeconds(.001f);
+            //addDots();
             
             //
             //}
             //test();
             //chosse_combine_dot();
-            //drop();
-            //ScoreUpdate();
-            //addDots();
+            drop();
+            ScoreUpdate();
+            addDots();
+            if (changecolor == 1)
+            {
+                changeColor();
+                changecolor = 0;
+            }
+            afterInit = 0;
         }
     }
 
