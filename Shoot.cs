@@ -32,6 +32,7 @@ public class Shoot : MonoBehaviour {
                 b.GetComponent<Bullet>().direction = "H";
                 b.GetComponent<Bullet>().distance = -30;
                 b.transform.parent = transform;
+               // GetComponent<DynamicCannon>().addToBulletList(b);
                 yield return new WaitForSeconds(seconds);
             }else if(direction == "R")
             {
@@ -40,6 +41,7 @@ public class Shoot : MonoBehaviour {
                 b.GetComponent<Bullet>().direction = "H";
                 b.GetComponent<Bullet>().distance = 30;
                 b.transform.parent = transform;
+                //GetComponent<DynamicCannon>().addToBulletList(b);
                 yield return new WaitForSeconds(seconds);
             }
             else if (direction == "D")
@@ -49,6 +51,7 @@ public class Shoot : MonoBehaviour {
                 b.GetComponent<Bullet>().direction = "V";
                 b.GetComponent<Bullet>().distance = -30;
                 b.transform.parent = transform;
+               // GetComponent<DynamicCannon>().addToBulletList(b);
                 yield return new WaitForSeconds(seconds);
             }
             else if (direction == "U")
@@ -58,6 +61,7 @@ public class Shoot : MonoBehaviour {
                 b.GetComponent<Bullet>().direction = "V";
                 b.GetComponent<Bullet>().distance = 30;
                 b.transform.parent = transform;
+               // GetComponent<DynamicCannon>().addToBulletList(b);
                 yield return new WaitForSeconds(seconds);
             }
         }
