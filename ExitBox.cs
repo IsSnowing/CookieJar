@@ -14,7 +14,11 @@ public class ExitBox : MonoBehaviour {
             col.gameObject.tag == "Green" )
         {
             //Debug.Log("is touch");
-            Destroy(col.gameObject);
+            Debug.Log(gameObject.tag);
+            if (gameObject.tag != "Key")
+            {
+                Destroy(col.gameObject);
+            }
         }
     }
 }

@@ -5,12 +5,12 @@ using UnityEngine;
 public class Unlock : MonoBehaviour {
 
     public string type;
-    public GameObject[] locked;
-    public GameObject itself;
+    public List<GameObject> Locks = new List<GameObject>();
+    //public GameObject itself;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -18,6 +18,12 @@ public class Unlock : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void addLock(GameObject l)
+    {
+        Locks.Add(l);
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("in collision");
@@ -27,12 +33,12 @@ public class Unlock : MonoBehaviour {
             col.gameObject.tag == "Blue" ||
             col.gameObject.tag == "Ball")
         {
-            for(int i = 0; i < locked.Length; i++)
+            for(int i = 0; i < Locks.Count; i++)
             {
-                Destroy(locked[i]);
+                Destroy(Locks[i]);
             }
             //Debug.Log("is touch");
-            Destroy(itself);
+            Destroy(gameObject);
         }
     }
 }

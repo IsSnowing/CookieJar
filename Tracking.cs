@@ -34,11 +34,12 @@ public class Tracking : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("in collision");
-        if (col.gameObject.tag == "Ball" ||
+        if (gameObject.tag == "TrackingBall" &&
+            (col.gameObject.tag == "Ball" ||
             col.gameObject.tag == "Red" ||
             col.gameObject.tag == "Blue" ||
             col.gameObject.tag == "Yellow" ||
-            col.gameObject.tag == "Green")
+            col.gameObject.tag == "Green"))
         {
             //Debug.Log("is touch");
             Destroy(col.gameObject);
