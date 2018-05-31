@@ -11,9 +11,11 @@ public class Rotation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        StartCoroutine(rotate());
-	}
-    IEnumerator rotate()
+        //StartCoroutine(rotate());
+        rotate();
+
+    }
+    void rotate()
     {
         if (Input.GetMouseButtonUp(0))
         {
@@ -21,12 +23,12 @@ public class Rotation : MonoBehaviour {
             if (Input.mousePosition.x >= 130)
             {
                 StartCoroutine(slowDownRotation(-90));
-                yield return new WaitForSeconds(.5f);
+                //yield return new WaitForSeconds(.5f);
             }
             else if (Input.mousePosition.x < 130)
             {
                 StartCoroutine(slowDownRotation(90));
-                yield return new WaitForSeconds(.5f);
+                //yield return new WaitForSeconds(.5f);
             }
             // Debug.Log("this is rotation" + (int)this.transform.rotation.eulerAngles.z);
             //Debug.Log(allDots[0, 0].tag);
@@ -41,7 +43,7 @@ public class Rotation : MonoBehaviour {
         {
             this.transform.Rotate(0, 0, angle, Space.World);
             a++;
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.03f);
         }
 
     }
