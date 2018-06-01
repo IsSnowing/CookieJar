@@ -18,8 +18,11 @@ public class MoveUp : MonoBehaviour {
 
     private void Move()
     {
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, distance, transform.position.z), step);
-        distance += 1;
+        if (transform.position.y < -7)
+        {
+            float step = speed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, distance, transform.position.z), step);
+            distance += 1;
+        }
     }
 }
