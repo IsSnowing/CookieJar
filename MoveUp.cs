@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveUp : MonoBehaviour {
-    public float speed;
-    private float distance = 1;
+    private float speed;
+    private float distance;
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start()
+    {
+         speed = .5f;
+         distance = 1;
+        //GameCondition.pauseGame = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -18,7 +21,8 @@ public class MoveUp : MonoBehaviour {
 
     private void Move()
     {
-        if (transform.position.y < -7)
+        Debug.Log(speed);
+        if (transform.position.y < -7 && GameCondition.pauseGame == false)
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, distance, transform.position.z), step);

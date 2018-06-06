@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Border2 : MonoBehaviour {
+public class RemoveScene : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //gameObject.GetComponent<SpriteRenderer>().sprite = GameController.BorderMaterials[1];
+		
 	}
 	
+	// Update is called once per frame
+	void Update () {
+		
+	}
 }

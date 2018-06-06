@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivateBorder : MonoBehaviour {
 
+public class ActivateBorder : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         GetComponent<Rotation>().enabled = false;
@@ -22,8 +22,9 @@ public class ActivateBorder : MonoBehaviour {
             GetComponent<Rotation>().enabled = true;
             if (transform.position.y <= -12)
             {
-                GetComponent<Rotation>().enabled = false;
+                GetComponent<Rotation>().enabled = false; 
             }
         }
+        
     }
 }

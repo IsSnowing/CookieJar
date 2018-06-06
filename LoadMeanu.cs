@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadMeanu : MonoBehaviour {
-    public int scene;
 
-    public void loadScene(int i)
+    public void loadScene(string str)
     {
-        SceneManager.LoadScene(i);
+        SceneManager.LoadScene(str);
         
 	}
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class MoveDown : MonoBehaviour
 {
     public static float speed = 1.5f;
-    public float rate = 1.1f;
     private float distance;
     // Use this for initialization
     void Start()
     {
+        //speed = 1.5f;
         distance = transform.position.y;
         
     }
@@ -17,7 +17,10 @@ public class MoveDown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (GameCondition.pauseGame == false)
+        {
+            Move();
+        }
 
     }
 

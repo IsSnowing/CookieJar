@@ -5,12 +5,13 @@ using UnityEngine;
 public class SetBorder : MonoBehaviour
 {
     public int borderType;
+    public static Sprite[] borderMaterial;
     // Use this for initialization
     void Start()
     {
-        if (GameController.GameControl.BorderMaterials != null)
+        if (borderMaterial != null)
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = GameController.GameControl.BorderMaterials[borderType - 1];
+            gameObject.GetComponent<SpriteRenderer>().sprite = borderMaterial[borderType - 1];
         }
     }
 

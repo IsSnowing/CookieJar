@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadScene : MonoBehaviour {
-    public int num;
+
+public class Load : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
-        SceneManager.LoadScene(num, LoadSceneMode.Additive);
+        SceneManager.LoadScene("Border0_1", LoadSceneMode.Additive);
     }
+	
+
 }

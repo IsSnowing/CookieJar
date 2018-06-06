@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Skins : MonoBehaviour {
+    public Sprite[] White;
 
     public Sprite[] Gold;
     public Sprite[] Green;
@@ -23,89 +24,129 @@ public class Skins : MonoBehaviour {
     public  Sprite[] Zebra_Pink;
     public  Sprite[] Zebra_Orange;
     public  Sprite[] Maple;
+    public Sprite[] Rainbow;
+    public Sprite[] Shine;
 
 
-    public void changeBorderSkin(string str)
+    public int borderType;
+    private Sprite[] current;
+
+    // Use this for initialization
+    void Start()
+    {
+        loadSkin();
+    }
+
+    public void loadSkin()
+    {
+        GameController.Load();
+        Debug.Log(GameController.BorderMaterials);
+        if (GameController.BorderMaterials != null)
+        {
+            
+            current = changeBorderSkin(GameController.BorderMaterials);
+            SetBorder.borderMaterial = current;
+        }
+    }
+
+    public void saveSkin(string str)
+    {
+        GameController.BorderMaterials = str;
+        GameController.Save();
+        loadSkin();
+    }
+
+    private Sprite[] changeBorderSkin(string str)
     {
         //gameObject.GetComponent<GameController>().HighestScore++;
-        //Debug.Log(Control.BorderMaterials);
-        GameController Control = GameController.GameControl;
+        Debug.Log(str);
+        //GameController Control = GameController.GameControl;
         if (str == "Gold")
         {
-            Control.BorderMaterials = Gold;
+            return Gold;
         }
         else if (str == "Green")
         {
-            Control.BorderMaterials = Green;
+            return Green;
         }
         else if (str == "Grey")
         {
-            Control.BorderMaterials = Grey;
+            return Grey;
         }
         else if (str == "LightBlue")
         {
-            Control.BorderMaterials = LightBlue;
+            return LightBlue;
         }
         else if (str == "Purple")
         {
-            Control.BorderMaterials = Purple;
+            return Purple;
         }
         else if (str == "Red")
         {
-            Control.BorderMaterials = Red;
+            return Red;
         }
         else if (str == "Hollow_Gold")
         {
-            Control.BorderMaterials = Hollow_Gold;
+            return Hollow_Gold;
         }
         else if (str == "Hollow_Green")
         {
-            Control.BorderMaterials = Hollow_Green;
+            return Hollow_Green;
         }
         else if (str == "Hollow_Grey")
         {
-            Control.BorderMaterials = Hollow_Grey;
+            return Hollow_Grey;
         }
         else if (str == "Hollow_LightBlue")
         {
-            Control.BorderMaterials = Hollow_LightBlue;
+            return Hollow_LightBlue;
         }
         else if (str == "Hollow_Purple")
         {
-            Control.BorderMaterials = Hollow_Purple;
+            return Hollow_Purple;
         }
         else if (str == "Hollow_Red")
         {
-            Control.BorderMaterials = Hollow_Red;
+            return Hollow_Red;
         }
         else if (str == "Zebra_Red")
         {
-            Control.BorderMaterials = Zebra_Red;
+            return Zebra_Red;
         }
         //Debug.Log(Control.BorderMaterials);
         else if(str == "Zebra_Blue")
         {
-            Control.BorderMaterials = Zebra_Blue;
+            return Zebra_Blue;
         }
         else if (str == "Zebra_Yellow")
         {
-            Control.BorderMaterials = Zebra_Yellow;
+            return Zebra_Yellow;
         }
         else if (str == "Zebra_Green")
         {
-            Control.BorderMaterials = Zebra_Green;
+            return Zebra_Green;
         }
         else if (str == "Zebra_Pink")
         {
-            Control.BorderMaterials = Zebra_Pink;
+            return Zebra_Pink;
         }
         else if (str == "Zebra_Orange")
         {
-            Control.BorderMaterials = Zebra_Orange;
+            return Zebra_Orange;
         }
         else if (str == "Maple")
         {
-            Control.BorderMaterials = Maple;
+            return Maple;
         }
+        else if (str == "Rainbow")
+        {
+            return Rainbow;
+        }
+        else if (str == "Shine")
+        {
+            return Shine;
+        }
+        return White;
+        
     }
 }
