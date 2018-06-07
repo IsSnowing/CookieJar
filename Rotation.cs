@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Rotation : MonoBehaviour {
 
+    public int centerline;
+
 	// Use this for initialization
 	void Start () {
-		
+        centerline = Screen.width /2;
 	}
 	
 	// Update is called once per frame
@@ -20,12 +22,12 @@ public class Rotation : MonoBehaviour {
         if (Input.GetMouseButtonUp(0))
         {
 
-            if (Input.mousePosition.x >= 130)
+            if (Input.mousePosition.x >= centerline)
             {
                 StartCoroutine(slowDownRotation(-90));
                 //yield return new WaitForSeconds(.5f);
             }
-            else if (Input.mousePosition.x < 130)
+            else if (Input.mousePosition.x < centerline)
             {
                 StartCoroutine(slowDownRotation(90));
                 //yield return new WaitForSeconds(.5f);

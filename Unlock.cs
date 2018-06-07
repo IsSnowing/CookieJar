@@ -8,17 +8,6 @@ public class Unlock : MonoBehaviour {
     public List<GameObject> Locks = new List<GameObject>();
     //public GameObject itself;
 
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void addLock(GameObject l)
     {
         Locks.Add(l);
@@ -38,6 +27,7 @@ public class Unlock : MonoBehaviour {
                 Destroy(Locks[i]);
             }
             //Debug.Log("is touch");
+            GameController.addCoin();
             Destroy(gameObject);
         }
     }

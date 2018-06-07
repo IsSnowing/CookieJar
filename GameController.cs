@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public static int HighestScore;
     public static string BallMaterial;
     public static string BorderMaterials;
+    public static int Coins;
 
     //public GameController(){
     //    HighestScore = 0;
@@ -37,6 +38,7 @@ public class GameController : MonoBehaviour {
             HighestScore = 0;
             BallMaterial = "";
             BorderMaterials = "White";
+            Coins = 0;
             Save();
         }
         else
@@ -45,6 +47,13 @@ public class GameController : MonoBehaviour {
         }
             
 
+    }
+
+
+    public static void addCoin()
+    {
+        Coins++;
+        Debug.Log(Coins);
     }
 
     public static void Save()
@@ -56,6 +65,7 @@ public class GameController : MonoBehaviour {
         data.HighestScore = HighestScore;
         data.BallMaterial = BallMaterial;
         data.BorderMaterials = BorderMaterials;
+        data.Coins = Coins;
 
         bf.Serialize(file, data);
         file.Close();
@@ -73,15 +83,17 @@ public class GameController : MonoBehaviour {
             HighestScore = data.HighestScore;
             BallMaterial = data.BallMaterial;
             BorderMaterials = data.BorderMaterials;
+            Coins = data.Coins;
         }
     }
 
     [Serializable]
     class PlayerData
     {
+        public int Coins;
         public int HighestScore;
         public string BallMaterial;
-        public string BorderMaterials;
+        public string BorderMaterials;   
     }
 	
 }
