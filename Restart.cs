@@ -11,9 +11,15 @@ public class Restart : MonoBehaviour {
     {
         //Debug.Log("isdestroy");
         GameController.Save();
-        GameCondition.pauseGame = false;
+        GameCondition.pauseGame = true;
         MoveDown.speed = 1.5f;
         SceneManager.LoadScene("Restart", LoadSceneMode.Additive);
+    }
+
+
+    public void startgame()
+    {
+        GameCondition.pauseGame = false;
     }
 
 

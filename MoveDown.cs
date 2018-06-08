@@ -11,7 +11,8 @@ public class MoveDown : MonoBehaviour
     {
         //speed = 1.5f;
         distance = transform.position.y;
-        
+        //speed = 1.5f;
+        GameCondition.pauseGame = false;
     }
 
     // Update is called once per frame

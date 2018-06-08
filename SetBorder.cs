@@ -6,6 +6,7 @@ public class SetBorder : MonoBehaviour
 {
     public int borderType;
     public static Sprite[] borderMaterial;
+    public static Sprite ballMaterial;
     // Use this for initialization
     void Start()
     {

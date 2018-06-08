@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
 
         {
             HighestScore = 0;
-            BallMaterial = "";
+            BallMaterial = "Ball";
             BorderMaterials = "White";
             Coins = 0;
             Save();
@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour {
         else
         {
             gameObject.GetComponent<Skins>().loadSkin();
+            gameObject.GetComponent<Skins>().loadSkinBall();
         }
             
 

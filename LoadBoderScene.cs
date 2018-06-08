@@ -38,34 +38,14 @@ public class LoadBoderScene : MonoBehaviour {
         
 		if(transform.position.y <= -10)
         {
-            //while (true)
-            //{
-            //   int sceneNum = Random.Range(1, 4);
-            //   if (borderMap[sceneNum] == false)
-            //   {
-            //unload scene
-            //      unload();
-            //      SceneManager.UnloadSceneAsync(sceneNum);
-
-            //add scene
-            //      borderMap[sceneNum] = true;
-            //      SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
-            //      queue[queue.Length - 1] = sceneNum;
-
-            //set the condition back
-            //      transform.position = new Vector3(0, 0, transform.position.z);
-            //      break;
-            //  }
-            //}
-
-            //add scene
-            //borderMap[sceneNum] = true;
             int sceneNum = Random.Range(1, 4);
             SceneManager.LoadScene(sceneNum, LoadSceneMode.Additive);
             queue[queue.Length - 1] = sceneNum;
 
             //set the condition back
             transform.position = new Vector3(0, 0, transform.position.z);
+
+           
         } 
 	}
 

@@ -27,6 +27,7 @@ public class ActivateBorder : MonoBehaviour {
                 GameObject i = Instantiate(Backlock, new Vector3(0, transform.position.y-4.75f, transform.position.z), Quaternion.identity);
                 i.transform.parent = transform;
                 create = true;
+                Score.currentScore++;
             }
             if (transform.position.y <= -12)
             {
