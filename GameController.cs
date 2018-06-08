@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
     public static string BallMaterial;
     public static string BorderMaterials;
     public static int Coins;
+    public static string BallLock;
+    public static string BorderLock;
 
     //public GameController(){
     //    HighestScore = 0;
@@ -29,8 +31,8 @@ public class GameController : MonoBehaviour {
         //{
         //    Destroy(gameObject);
         //}
-
-        
+        //File.Delete(Application.persistentDataPath + "/playerInfo.dat");
+        //UnityEditor.AssetDatabase.Refresh();
 
         if (!File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
 
@@ -39,12 +41,14 @@ public class GameController : MonoBehaviour {
             BallMaterial = "Ball";
             BorderMaterials = "White";
             Coins = 0;
+            BallLock = "111111111111111111111";
+            BorderLock = "111111111111111111111";
             Save();
         }
         else
         {
-            gameObject.GetComponent<Skins>().loadSkin();
-            gameObject.GetComponent<Skins>().loadSkinBall();
+            Skins.loadSkin();
+            Skins.loadSkinBall();
         }
             
 
@@ -67,6 +71,8 @@ public class GameController : MonoBehaviour {
         data.BallMaterial = BallMaterial;
         data.BorderMaterials = BorderMaterials;
         data.Coins = Coins;
+        data.BallLock = BallLock;
+        data.BorderLock = BorderLock;
 
         bf.Serialize(file, data);
         file.Close();
@@ -85,6 +91,8 @@ public class GameController : MonoBehaviour {
             BallMaterial = data.BallMaterial;
             BorderMaterials = data.BorderMaterials;
             Coins = data.Coins;
+            BallLock = data.BallLock;
+            BorderLock = data.BorderLock;
         }
     }
 
@@ -94,7 +102,9 @@ public class GameController : MonoBehaviour {
         public int Coins;
         public int HighestScore;
         public string BallMaterial;
-        public string BorderMaterials;   
+        public string BorderMaterials;
+        public string BallLock;
+        public string BorderLock;
     }
 	
 }

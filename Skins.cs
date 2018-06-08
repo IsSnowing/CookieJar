@@ -5,59 +5,57 @@ using UnityEngine;
 public class Skins : MonoBehaviour {
     
     //Border
-    public Sprite[] White;
+    public static Sprite[] White;
 
-    public Sprite[] Gold;
-    public Sprite[] Green;
-    public Sprite[] Grey;
-    public Sprite[] LightBlue;
-    public Sprite[] Purple;
-    public Sprite[] Red;
-    public Sprite[] Hollow_Gold;
-    public Sprite[] Hollow_Green;
-    public Sprite[] Hollow_Grey;
-    public Sprite[] Hollow_LightBlue;
-    public Sprite[] Hollow_Purple;
-    public Sprite[] Hollow_Red;
-    public  Sprite[] Zebra_Red;
-    public  Sprite[] Zebra_Blue;
-    public  Sprite[] Zebra_Yellow;
-    public  Sprite[] Zebra_Green;
-    public  Sprite[] Zebra_Pink;
-    public  Sprite[] Zebra_Orange;
-    public  Sprite[] Maple;
-    public Sprite[] Rainbow;
-    public Sprite[] Shine;
+    public static Sprite[] Gold;
+    public static Sprite[] Green;
+    public static Sprite[] Grey;
+    public static Sprite[] LightBlue;
+    public static Sprite[] Purple;
+    public static Sprite[] Red;
+    public static Sprite[] Hollow_Gold;
+    public static Sprite[] Hollow_Green;
+    public static Sprite[] Hollow_Grey;
+    public static Sprite[] Hollow_LightBlue;
+    public static Sprite[] Hollow_Purple;
+    public static Sprite[] Hollow_Red;
+    public static Sprite[] Zebra_Red;
+    public static Sprite[] Zebra_Blue;
+    public static Sprite[] Zebra_Yellow;
+    public static Sprite[] Zebra_Green;
+    public static Sprite[] Zebra_Pink;
+    public static Sprite[] Zebra_Orange;
+    public static Sprite[] Maple;
+    public static Sprite[] Rainbow;
+    public static Sprite[] Shine;
 
     //Ball
-    public Sprite Ball;
+    public static Sprite Ball;
 
-    public Sprite BallYellow;
-    public Sprite BallRed;
-    public Sprite BallPurple;
-    public Sprite BallPink;
-    public Sprite BallGreen;
-    public Sprite BallBlue;
-    public Sprite BallYellow3D;
-    public Sprite BallRed3D;
-    public Sprite BallPurple3D;
-    public Sprite BallPink3D;
-    public Sprite BallGreen3D;
-    public Sprite BallBlue3D;
-    public Sprite SmileBlue;
-    public Sprite SmileGreen;
-    public Sprite SmilePink;
-    public Sprite SmilePurple;
-    public Sprite SmileRed;
-    public Sprite SmileYellow;
-    public Sprite Random;
-    public Sprite Square;
-    public Sprite Cosmic;
+    public static Sprite BallYellow;
+    public static Sprite BallRed;
+    public static Sprite BallPurple;
+    public static Sprite BallPink;
+    public static Sprite BallGreen;
+    public static Sprite BallBlue;
+    public static Sprite BallYellow3D;
+    public static Sprite BallRed3D;
+    public static Sprite BallPurple3D;
+    public static Sprite BallPink3D;
+    public static Sprite BallGreen3D;
+    public static Sprite BallBlue3D;
+    public static Sprite SmileBlue;
+    public static Sprite SmileGreen;
+    public static Sprite SmilePink;
+    public static Sprite SmilePurple;
+    public static Sprite SmileRed;
+    public static Sprite SmileYellow;
+    public static Sprite Random;
+    public static Sprite Square;
+    public static Sprite Cosmic;
 
-
-    public int borderType;
-    private Sprite[] current;
-    private Sprite curretBall;
+    private static Sprite[] current;
+    private static Sprite curretBall;
 
     // Use this for initialization
     void Start()
@@ -66,7 +64,7 @@ public class Skins : MonoBehaviour {
         loadSkinBall();
     }
 
-    public void loadSkin()
+    public static void loadSkin()
     {
         GameController.Load();
         //Debug.Log(GameController.BorderMaterials);
@@ -78,7 +76,7 @@ public class Skins : MonoBehaviour {
         }
     }
 
-    public void loadSkinBall()
+    public static void loadSkinBall()
     {
         GameController.Load();
         Debug.Log(GameController.BallMaterial);
@@ -90,20 +88,20 @@ public class Skins : MonoBehaviour {
         }
     }
 
-    public void saveSkin(string str)
+    public static void saveSkin(string str)
     {
         GameController.BorderMaterials = str;
         GameController.Save();
         loadSkin();
     }
-    public void saveSkinBall(string str)
+    public static void saveSkinBall(string str)
     {
         GameController.BallMaterial = str;
         GameController.Save();
         loadSkinBall();
     }
 
-    private Sprite[] changeBorderSkin(string str)
+    private static Sprite[] changeBorderSkin(string str)
     {
         //gameObject.GetComponent<GameController>().HighestScore++;
         Debug.Log(str);
@@ -197,7 +195,7 @@ public class Skins : MonoBehaviour {
         
     }
 
-    private Sprite changeBallSkin(string str)
+    private static Sprite changeBallSkin(string str)
     {
         //gameObject.GetComponent<GameController>().HighestScore++;
         Debug.Log(str);
