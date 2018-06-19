@@ -14,25 +14,30 @@ public class ActivateBorder : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         activate();
-
     }
 
     void activate()
     {
-        if (transform.position.y <= -3)
+        if (MoveUp.cameraDis >= transform.position.y + 3.5 &&
+            MoveUp.cameraDis < transform.position.y + 13)
         {
             GetComponent<Rotation>().enabled = true;
-            if (tag != "Border1" && create == false)
+            if (MoveUp.cameraDis >= transform.position.y + 3.5 && tag != "Border1" && create == false)
             {
                 GameObject i = Instantiate(Backlock, new Vector3(0, transform.position.y-4.75f, transform.position.z), Quaternion.identity);
                 i.transform.parent = transform;
                 create = true;
                 Score.currentScore++;
             }
-            if (transform.position.y <= -12)
-            {
-                GetComponent<Rotation>().enabled = false; 
-            }
+        }
+        else
+        {
+            GetComponent<Rotation>().enabled = false; 
+        }
+
+        if(MoveUp.cameraDis > transform.position.y + 15)
+        {
+            Destroy(gameObject);
         }
     }
 }

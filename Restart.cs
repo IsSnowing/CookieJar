@@ -4,24 +4,64 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Restart : MonoBehaviour {
+    //public AudioSource destroySound;
+    Animator anim;
+    int explotionHash = Animator.StringToHash("BallExplotion");
 
 
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        anim.enabled = false;
+       
+    }
     // Update is called once per frame
-    private void OnDestroy()
+    //void OnDestroy()
+   // {
+    //    StartCoroutine(whenDestroy());
+   // }
+
+
+    IEnumerator whenDestroy()
     {
         //Debug.Log("isdestroy");
-        GameController.Save();
+        
+        anim.enabled = true;
+        anim.SetTrigger(explotionHash);
         GameCondition.pauseGame = true;
-        MoveDown.speed = 1.5f;
+        
+        //gameObject.GetComponent<Rotation>().enabled = false;
+        
+        yield return new WaitForSeconds(.5f);
+        GameController.Save();
+        
+        //MoveDown.speed = 1.5f;
+        Destroy(gameObject);
+        //Score.prevScore = Score.currentScore;
         SceneManager.LoadScene("Restart", LoadSceneMode.Additive);
+        
     }
-
 
     public void startgame()
     {
         GameCondition.pauseGame = false;
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        //Debug.Log("is touch");
+        //Debug.Log(gameObject.tag);
 
+        
+        if (col.gameObject.tag != "Key")
+        {
 
+            gameObject.GetComponent<AudioSource>().Play();
+            gameObject.GetComponent<Dragger>().enabled = false;
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            StartCoroutine(whenDestroy());
+            
+        }
+
+    }
 }

@@ -79,7 +79,7 @@ public class Skins : MonoBehaviour {
     public static void loadSkinBall()
     {
         GameController.Load();
-        Debug.Log(GameController.BallMaterial);
+        //Debug.Log(GameController.BallMaterial);
         if (GameController.BallMaterial != null)
         {
 
@@ -104,7 +104,7 @@ public class Skins : MonoBehaviour {
     private static Sprite[] changeBorderSkin(string str)
     {
         //gameObject.GetComponent<GameController>().HighestScore++;
-        Debug.Log(str);
+        //Debug.Log(str);
         //GameController Control = GameController.GameControl;
         if (str == "Gold")
         {

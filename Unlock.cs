@@ -22,13 +22,23 @@ public class Unlock : MonoBehaviour {
             col.gameObject.tag == "Blue" ||
             col.gameObject.tag == "Ball")
         {
+            gameObject.GetComponent<AudioSource>().Play();
             for(int i = 0; i < Locks.Count; i++)
             {
                 Destroy(Locks[i]);
             }
             //Debug.Log("is touch");
             GameController.addCoin();
-            Destroy(gameObject);
+            gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            StartCoroutine(wait());
         }
     }
+
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(.5f);
+        Destroy(gameObject);
+    }
+    
 }

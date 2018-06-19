@@ -6,8 +6,8 @@ public class ExitBox : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("in collision");
-        if(col.gameObject.tag == "Ball" ||
+        //Debug.Log("in collision");
+        if(//col.gameObject.tag == "Ball" ||
             col.gameObject.tag == "Red" ||
             col.gameObject.tag == "Blue" ||
             col.gameObject.tag == "Yellow" ||

@@ -19,7 +19,8 @@ public class Rotation : MonoBehaviour {
     }
     void rotate()
     {
-        if (Input.GetMouseButtonUp(0))
+
+        if (Input.GetMouseButtonUp(0)  )
         {
 
             if (Input.mousePosition.x >= centerline)

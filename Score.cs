@@ -5,18 +5,42 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour {
 
     public static int currentScore;
+    public static int prevScore;
 
 	// Use this for initialization
-	void Start () {
-        Debug.Log("this is highestscore " + GameController.HighestScore.ToString());
-        gameObject.GetComponent<Text>().text = GameController.HighestScore.ToString();
-	}
+	void Awake () {
+        //Debug.Log("this is highestscore " + GameController.HighestScore.ToString());
+        currentScore = 0;
+        if (prevScore != 0)
+        {
+            gameObject.GetComponent<Text>().text = "High Score: " + GameController.HighestScore.ToString() + '\n' + "Score: " + prevScore.ToString();
+        }
+        else
+        {
+            gameObject.GetComponent<Text>().text = "High Score: " + GameController.HighestScore.ToString();
+        }
+
+    }
 
 
     private void Update()
     {
-        updateScore();
-        saveScore();
+        if (currentScore != 0)
+        {
+            updateScore();
+            saveScore();
+        }
+        else
+        {
+            if (prevScore != 0)
+            {
+                gameObject.GetComponent<Text>().text = "High Score: " + GameController.HighestScore.ToString() + '\n' + "Score: " + prevScore.ToString();
+            }
+            else
+            {
+                gameObject.GetComponent<Text>().text = "High Score: " + GameController.HighestScore.ToString();
+            }
+        }
     }
     public void updateScore()
     {
@@ -25,14 +49,16 @@ public class Score : MonoBehaviour {
 
     public void saveScore()
     {
-        if(GameCondition.pauseGame == true &&  currentScore > GameController.HighestScore)
+        if (GameCondition.pauseGame == true)
         {
-           
-            GameController.HighestScore = currentScore;
-            GameController.Save();
-            currentScore = 0;
+            prevScore = currentScore;
+            if (currentScore > GameController.HighestScore)
+            {
+
+                GameController.HighestScore = currentScore;
+                GameController.Save();
+            }
             
         }
-        
     }
 }

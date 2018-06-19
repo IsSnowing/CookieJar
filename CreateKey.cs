@@ -14,7 +14,7 @@ public class CreateKey : MonoBehaviour {
     void create()
     {
         float x = UnityEngine.Random.Range(-3.0f, 3.0f);
-        float y = UnityEngine.Random.Range(-3.0f, 3.0f);
+        float y = UnityEngine.Random.Range(0.0f, 3.0f);
         Vector3 vector = new Vector3(x, transform.position.y - y, transform.position.z);
         GameObject b = Instantiate(key, vector, Quaternion.identity);
         //b.transform.parent = transform;

@@ -8,6 +8,6 @@ public class Coin : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Debug.Log(GameController.Coins);
-        gameObject.GetComponent<Text>().text = GameController.Coins.ToString();
+        gameObject.GetComponent<Text>().text = "X " + GameController.Coins.ToString();
 	}
 }

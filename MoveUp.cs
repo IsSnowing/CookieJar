@@ -3,30 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveUp : MonoBehaviour {
-    private float speed;
-    private float distance;
+    public static float cameraDis;
+    private static float speed;
+    private static float distance;
     // Use this for initialization
     void Start()
     {
-         speed = .5f;
-         distance = 1;
+        speed = 1.5f;
+        distance = 100000000;
+        cameraDis = 0;
         //GameCondition.pauseGame = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Move();
+        //if (transform.position.y >= distance)
+        //{
+        cameraDis = transform.position.y;
+            Move();
+        //}
 
     }
 
     private void Move()
     {
-        Debug.Log(speed);
-        if (transform.position.y < -7 && GameCondition.pauseGame == false)
+        //Debug.Log(speed);
+        
+        if (GameCondition.pauseGame == false)
         {
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, distance, transform.position.z), step);
-            distance += 1;
+            if (speed < 8)
+            {
+                speed += .001f;
+            }
+            //float step = speed * Time.deltaTime;
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, distance, transform.position.z), step);
+            //distance += 1;
+            transform.position += transform.up * Time.deltaTime * speed;
         }
     }
 }
