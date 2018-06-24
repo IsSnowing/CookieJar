@@ -198,7 +198,7 @@ public class Skins : MonoBehaviour {
     private static Sprite changeBallSkin(string str)
     {
         //gameObject.GetComponent<GameController>().HighestScore++;
-        Debug.Log(str);
+        //Debug.Log(str);
         //GameController Control = GameController.GameControl;
         if (str == "BallYellow")
         {

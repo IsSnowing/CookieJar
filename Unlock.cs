@@ -22,7 +22,10 @@ public class Unlock : MonoBehaviour {
             col.gameObject.tag == "Blue" ||
             col.gameObject.tag == "Ball")
         {
-            gameObject.GetComponent<AudioSource>().Play();
+            if (Click.sound == true)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
+            }
             for(int i = 0; i < Locks.Count; i++)
             {
                 Destroy(Locks[i]);

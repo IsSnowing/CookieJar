@@ -56,7 +56,10 @@ public class Restart : MonoBehaviour {
         if (col.gameObject.tag != "Key")
         {
 
-            gameObject.GetComponent<AudioSource>().Play();
+            if (Click.sound == true)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
+            }
             gameObject.GetComponent<Dragger>().enabled = false;
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
             StartCoroutine(whenDestroy());

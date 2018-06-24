@@ -18,12 +18,14 @@ public class ActivateBorder : MonoBehaviour {
 
     void activate()
     {
-        if (MoveUp.cameraDis >= transform.position.y + 3.5 &&
-            MoveUp.cameraDis < transform.position.y + 13)
+        if (MoveUp.cameraDis - 10 >= transform.position.y - 5 )//  &&
+            //MoveUp.cameraDis < transform.position.y + 13)
         {
             GetComponent<Rotation>().enabled = true;
-            if (MoveUp.cameraDis >= transform.position.y + 3.5 && tag != "Border1" && create == false)
+            if (MoveUp.cameraDis - 10 >= transform.position.y - 5    && tag != "Border1" && create == false)
             {
+                Debug.Log("camera distance: " + MoveUp.cameraDis + " position y: " + (transform.position.y) + " create lock: " + (transform.position.y - 4.75f));
+            
                 GameObject i = Instantiate(Backlock, new Vector3(0, transform.position.y-4.75f, transform.position.z), Quaternion.identity);
                 i.transform.parent = transform;
                 create = true;
@@ -35,7 +37,7 @@ public class ActivateBorder : MonoBehaviour {
             GetComponent<Rotation>().enabled = false; 
         }
 
-        if(MoveUp.cameraDis > transform.position.y + 15)
+        if(MoveUp.cameraDis - 10 > transform.position.y + 15)
         {
             Destroy(gameObject);
         }

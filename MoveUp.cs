@@ -9,7 +9,7 @@ public class MoveUp : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        speed = 1.5f;
+        speed = 3.5f;
         distance = 100000000;
         cameraDis = 0;
         //GameCondition.pauseGame = false;
@@ -20,7 +20,7 @@ public class MoveUp : MonoBehaviour {
         //if (transform.position.y >= distance)
         //{
         cameraDis = transform.position.y;
-            Move();
+        Move();
         //}
 
     }

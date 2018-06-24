@@ -8,7 +8,7 @@ public class SetBall : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log("this is in start " + ballMaterial);
+        //Debug.Log("this is in start " + ballMaterial);
         if (ballMaterial != null)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = ballMaterial;

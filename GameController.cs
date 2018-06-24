@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour {
     public static void addCoin()
     {
         Coins++;
-        Debug.Log(Coins);
+        //Debug.Log(Coins);
     }
 
     public static void Save()
